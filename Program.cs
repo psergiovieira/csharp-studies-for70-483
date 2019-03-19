@@ -9,71 +9,14 @@ namespace myFirstApp
     {
         public static void Main(string[] args)
         {
-            //TestingThreads();
-            //TestingTask();
-            TestAsyncAwait();
+
+            Console.ReadKey();
         }
 
-        public static async void TestAsyncAwait()
+        private static void DynamicTest()
         {
-            try
-            {
-
-                Console.WriteLine(DownloadContent("http://www.microsoft.com").Result);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        public static async Task<string> DownloadContent(string url)
-        {
-            using (var client = new HttpClient())
-            {
-                string result = await client.GetStringAsync(url);
-                return result;
-            }
-        }
-
-        public static void TestingTask()
-        {
-            Task t = Task.Run(() =>
-            {
-                for (int x = 0; x < 100; x++)
-                {
-                    Console.WriteLine("---");
-                }
-            });
-
-            Console.WriteLine("task goes away");
-
-            t.Wait();
-            Console.WriteLine("The End");
-        }
-
-        public static void TestingThreads()
-        {
-            Thread t = new Thread(new ThreadStart(ThreadMethod));
-            t.Start();
-
-            for (int i = 0; i < 4; i++)
-            {
-                Console.WriteLine("Main thread: Do some work");
-                Thread.Sleep(0);
-            }
-
-            t.Join();
-        }
-
-        public static void ThreadMethod()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine("ThreadProc: {0}", i);
-                Thread.Sleep(0);
-            }
+            dynamic obj = new SampleObject();
+            Console.WriteLine(obj.SomeProperty);
         }
     }
 }
